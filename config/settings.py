@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "apps.core",
+    'core.apps.CoreConfig',
     "apps.progress",
     "apps.blog",
 ]
