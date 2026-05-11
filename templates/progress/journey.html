@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Journey — {{ site_profile.owner_name|default:"Dina Jendeya" }}{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">// journey</p>
+        <h1 class="page-title">Learning tracks</h1>
+        <p class="lead">Each card is a track I'm working through. Click in to see entries and milestones.</p>
+
+        {% if topics %}
+        <div class="grid grid-3 mt-2">
+            {% for topic in topics %}
+            <a class="card topic-card" href="{{ topic.get_absolute_url }}">
+                <div class="topic-card-head">
+                    <span class="topic-icon">{{ topic.icon|default:"#" }}</span>
+                    <span class="badge badge-{{ topic.status }}">{{ topic.get_status_display }}</span>
+                </div>
+                <h2 class="card-title">{{ topic.title }}</h2>
+                <p class="card-summary">{{ topic.summary }}</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: {{ topic.progress_percent }}%"></div></div>
+                <span class="muted small">{{ topic.progress_percent }}% complete</span>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="muted">No topics yet. Add some from the admin.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

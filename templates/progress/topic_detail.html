@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}{{ topic.title }} — Journey{% endblock %}
+{% block description %}{{ topic.summary|default:topic.title }}{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">// track</p>
+        <div class="topic-header">
+            <h1 class="page-title">{{ topic.icon }} {{ topic.title }}</h1>
+            <span class="badge badge-{{ topic.status }}">{{ topic.get_status_display }}</span>
+        </div>
+        {% if topic.summary %}<p class="lead">{{ topic.summary }}</p>{% endif %}
+
+        <div class="progress-bar large"><div class="progress-fill" style="width: {{ topic.progress_percent }}%"></div></div>
+        <p class="muted small">{{ topic.progress_percent }}% complete</p>
+
+        {% if topic.description %}
+        <div class="prose mt-2">{{ topic.description|linebreaks }}</div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container two-col">
+        <div>
+            <h2 class="section-title">Progress entries</h2>
+            {% if entries %}
+            <ul class="timeline">
+                {% for e in entries %}
+                <li class="timeline-item">
+                    <time class="timeline-date">{{ e.entry_date|date:"M j, Y" }}</time>
+                    <h3 class="timeline-title">{{ e.title }}</h3>
+                    <p class="muted small">{{ e.get_entry_type_display }}</p>
+                    {% if e.summary %}<p>{{ e.summary }}</p>{% endif %}
+                    {% if e.body %}<div class="prose">{{ e.body|linebreaks }}</div>{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="muted">No published entries for this track yet.</p>
+            {% endif %}
+        </div>
+        <div>
+            <h2 class="section-title">Milestones</h2>
+            {% if milestones %}
+            <ul class="milestone-list">
+                {% for m in milestones %}
+                <li class="milestone-item milestone-{{ m.importance }}">
+                    <div class="milestone-head">
+                        <span class="milestone-dot" aria-hidden="true"></span>
+                        <strong>{{ m.title }}</strong>
+                    </div>
+                    <p class="muted small">{{ m.achieved_on|date:"M j, Y" }}</p>
+                    {% if m.description %}<p>{{ m.description }}</p>{% endif %}
+                    {% if m.evidence_url %}<p><a href="{{ m.evidence_url }}" target="_blank" rel="noopener">Evidence &rarr;</a></p>{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="muted">No milestones recorded yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Milestones — {{ site_profile.owner_name|default:"Dina Jendeya" }}{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">// milestones</p>
+        <h1 class="page-title">Milestones</h1>
+        <p class="lead">Wins worth marking — small and large.</p>
+
+        {% if milestones %}
+        <ul class="milestone-list mt-2">
+            {% for m in milestones %}
+            <li class="milestone-item milestone-{{ m.importance }}">
+                <div class="milestone-head">
+                    <span class="milestone-dot" aria-hidden="true"></span>
+                    <strong>{{ m.title }}</strong>
+                </div>
+                <p class="muted small">
+                    <a href="{{ m.topic.get_absolute_url }}">{{ m.topic.title }}</a>
+                    · {{ m.achieved_on|date:"M j, Y" }}
+                    · {{ m.get_importance_display }}
+                </p>
+                {% if m.description %}<p>{{ m.description }}</p>{% endif %}
+                {% if m.evidence_url %}<p><a href="{{ m.evidence_url }}" target="_blank" rel="noopener">Evidence &rarr;</a></p>{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="muted">No milestones yet.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

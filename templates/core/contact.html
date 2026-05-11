@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Contact — {{ site_profile.owner_name|default:"Dina Jendeya" }}{% endblock %}
+
+{% block content %}
+<section class="section section-narrow">
+    <div class="container">
+        <p class="eyebrow">// contact</p>
+        <h1 class="page-title">Get in touch</h1>
+        <p>Reach out for collaboration, mentorship questions, or to share resources.</p>
+
+        <ul class="contact-list">
+            {% if site_profile.contact_email %}
+                <li><strong>Email:</strong> <a href="mailto:{{ site_profile.contact_email }}">{{ site_profile.contact_email }}</a></li>
+            {% endif %}
+            {% if site_profile.linkedin_url %}
+                <li><strong>LinkedIn:</strong> <a href="{{ site_profile.linkedin_url }}" target="_blank" rel="noopener">{{ site_profile.linkedin_url }}</a></li>
+            {% endif %}
+            {% if site_profile.github_url %}
+                <li><strong>GitHub:</strong> <a href="{{ site_profile.github_url }}" target="_blank" rel="noopener">{{ site_profile.github_url }}</a></li>
+            {% endif %}
+            {% if site_profile.twitter_url %}
+                <li><strong>Twitter / X:</strong> <a href="{{ site_profile.twitter_url }}" target="_blank" rel="noopener">{{ site_profile.twitter_url }}</a></li>
+            {% endif %}
+        </ul>
+
+        {% if not site_profile.contact_email and not site_profile.linkedin_url and not site_profile.github_url and not site_profile.twitter_url %}
+            <p class="muted">Add contact links from the Django admin under <em>Site profile &rsaquo; Contact &amp; Social</em>.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

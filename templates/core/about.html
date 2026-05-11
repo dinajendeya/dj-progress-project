@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}About — {{ site_profile.owner_name|default:"Dina Jendeya" }}{% endblock %}
+
+{% block content %}
+<section class="section section-narrow">
+    <div class="container">
+        <p class="eyebrow">// about</p>
+        <h1 class="page-title">About {{ site_profile.owner_name|default:"Dina Jendeya" }}</h1>
+
+        {% if site_profile.about_body %}
+            <div class="prose">{{ site_profile.about_body|linebreaks }}</div>
+        {% else %}
+            <div class="prose">
+                <p>This site documents my learning journey across Linux, networking, programming, and cybersecurity fundamentals — built through mentorship and a lot of late-night terminals.</p>
+                <p>Update this page from the Django admin under <em>Site profile &rsaquo; About body</em>.</p>
+            </div>
+        {% endif %}
+
+        {% if site_profile.mentorship_blurb %}
+        <div class="callout mt-2">
+            <h2 class="section-title">Mentorship</h2>
+            <p>{{ site_profile.mentorship_blurb|linebreaks }}</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

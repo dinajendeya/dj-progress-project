@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} — Blog{% endblock %}
+{% block description %}{{ post.excerpt }}{% endblock %}
+
+{% block content %}
+<article class="section section-narrow">
+    <div class="container">
+        <p class="eyebrow">// post</p>
+        <h1 class="page-title">{{ post.title }}</h1>
+        <p class="muted small">Published {{ post.published_on|date:"F j, Y" }}</p>
+        {% if post.excerpt %}<p class="lead">{{ post.excerpt }}</p>{% endif %}
+        <div class="prose mt-2">{{ post.body|linebreaks }}</div>
+
+        {% if post.related_topics.all %}
+        <div class="mt-2">
+            <p class="muted small">Related tracks:</p>
+            <ul class="tag-list">
+                {% for t in post.related_topics.all %}
+                    <li><a class="tag" href="{{ t.get_absolute_url }}">{{ t.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <p class="mt-2"><a href="{% url 'blog:post_list' %}">&larr; All posts</a></p>
+    </div>
+</article>
+{% endblock %}

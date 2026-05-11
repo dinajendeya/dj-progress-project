@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Blog — {{ site_profile.owner_name|default:"Dina Jendeya" }}{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">// blog</p>
+        <h1 class="page-title">Writing &amp; reflections</h1>
+
+        {% if posts %}
+        <div class="grid grid-2 mt-2">
+            {% for post in posts %}
+            <a class="card" href="{{ post.get_absolute_url }}">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <p class="muted small">{{ post.published_on|date:"M j, Y" }}</p>
+                <p>{{ post.excerpt }}</p>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="muted">No posts published yet.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
