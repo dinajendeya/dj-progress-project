@@ -1,6 +1,6 @@
 # Dina Jendeya — Learning Journey Website
 
-A small Django site for Dina Jendeya to share progress from her cybersecurity mentorship journey: Linux, CCNA networking, Python, OverTheWire Bandit, TryHackMe Security 101, and building this blog.
+A small Django site to share progress from my cybersecurity mentorship journey: Linux, CCNA networking, Python, OverTheWire Bandit, TryHackMe Security 101, and building this blog.
 
 ## Stack
 
