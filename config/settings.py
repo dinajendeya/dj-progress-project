@@ -21,17 +21,17 @@ SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY",
     "dev-insecure-key-change-me-in-production",
 )
-DEBUG = _env_bool("DJANGO_DEBUG", True)
+DEBUG = _env_bool("DJANGO_DEBUG", False)
 ALLOWED_HOSTS = [
     h.strip()
-    for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+    for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,.onrender.com").split(",")
     if h.strip()
 ]
 CSRF_TRUSTED_ORIGINS = [
     o.strip()
     for o in os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
     if o.strip()
-]
+] + ["https://*.onrender.com"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
